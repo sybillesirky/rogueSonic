@@ -40,6 +40,10 @@ func _animsSuperSonic(currentState, currentSpecialAction):
 				$charSprite.animation = "dash"
 				$charSprite.rotation += 0.5 * PI * get_parent().horizontalDirection
 				$charSprite.offset.y = 0
+			
+			specialAction.Homing:
+				$charSprite.animation = "roll"
+				$charSprite.offset.y = 7
 		
 		return
 	
@@ -94,6 +98,10 @@ func _animsShadow(currentState, currentSpecialAction):
 			specialAction.Bounce:
 				$charSprite.animation = "bounce"
 				$charSprite.offset.y = 0
+			
+			specialAction.Homing:
+				$charSprite.animation = "roll"
+				$charSprite.offset.y = 7
 		
 		return
 	
@@ -145,6 +153,10 @@ func _animsSonic(currentState, currentSpecialAction):
 			specialAction.Bounce:
 				$charSprite.animation = "bounce"
 				$charSprite.offset.y = 0
+			
+			specialAction.Homing:
+				$charSprite.animation = "roll"
+				$charSprite.offset.y = 7
 		
 		return
 	

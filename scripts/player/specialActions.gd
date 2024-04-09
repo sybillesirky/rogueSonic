@@ -8,7 +8,22 @@ var currentSpecialAction = specialAction.None
 
 var bounceIncrease = 0
 
-var jumpDashParticle = preload("res://scenes/effect/sonic/jump_dash_particle.tscn")
+const jumpDashParticle = preload("res://scenes/effect/sonic/jump_dash_particle.tscn")
+
+
+func _specialActionHomingAttack(velocity):
+	var homingDestination = get_parent().get_parent().homingDestination
+	var returnVelocity = 0
+	if get_parent().position != homingDestination:
+		get_parent()._changeState(state.Fall)
+		get_parent().position = get_parent().position.move_toward(homingDestination, 17)
+		returnVelocity = Vector2(0,0)
+	else:
+		get_parent()._changeState(state.Jump)
+		currentSpecialAction = specialAction.None
+		returnVelocity = Vector2(0,-400)
+	
+	return returnVelocity
 
 
 func _specialActionBounceBracelet(currentState, velocity):
@@ -96,7 +111,7 @@ func _doSpecialAction(currentState, velocity, currentCharacter, inputAction):
 	# If special actions shouldn't be allowed, just return the velocity immediately
 	if !(currentState == state.Jump or currentSpecialAction == specialAction.Bounce) or !get_parent().get_node("jumpActionTimer").is_stopped():
 		return velocity
-		
+	
 	if !(currentSpecialAction == specialAction.None or currentSpecialAction == specialAction.Bounce):
 		return velocity
 	
@@ -135,7 +150,18 @@ func _specialActionsHandler(inputCharacter, currentState, velocity, delta):
 	# Regular landing behaviour
 	elif get_parent().is_on_floor():
 		currentSpecialAction = specialAction.None
+		get_parent().get_parent().homingDestination = Vector2(0,0)
 		bounceIncrease = 0
+	
+	# Homing Attack
+	if Input.is_action_just_pressed("jump") and get_parent().get_parent().homingDestination != Vector2(0,0):
+		currentSpecialAction = specialAction.Homing
+		get_parent()._changeState(state.Fall)
+		get_parent().get_node("effectAudioPlayer").playPlayerSFX(5, inputCharacter)
+	
+	if currentSpecialAction == specialAction.Homing:
+		returnVelocity = _specialActionHomingAttack(velocity)
+		return returnVelocity
 	
 	# Global upward jump actions have the highest priority
 	if Input.is_action_just_pressed("jump") and Input.is_action_pressed("up"):

@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bw08d330u4t33"]
+[gd_scene load_steps=9 format=3 uid="uid://bw08d330u4t33"]
 
 [ext_resource type="PackedScene" uid="uid://h2ethryphew6" path="res://scenes/player/player.tscn" id="1_iwfjl"]
 [ext_resource type="PackedScene" uid="uid://cgeucdgeak803" path="res://scenes/envir/stages/test_stage.tscn" id="2_1rug4"]
 [ext_resource type="Script" path="res://scripts/testHurtScript.gd" id="3_ssire"]
+[ext_resource type="PackedScene" uid="uid://dph5dx6ir126d" path="res://scenes/enemy/enemyAndroid.tscn" id="4_gmyt1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lmqwm"]
 size = Vector2(64, 64)
@@ -56,6 +57,9 @@ position = Vector2(576, -16)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
 shape = SubResource("CircleShape2D_xt8gi")
 debug_color = Color(0, 0.65098, 0.156863, 0.419608)
+
+[node name="enemyAndroid" parent="." instance=ExtResource("4_gmyt1")]
+position = Vector2(-472, 8)
 
 [connection signal="body_entered" from="testTrigger" to="playerSonic" method="_getHurt"]
 [connection signal="body_entered" from="testTrigger2" to="playerSonic" method="_getHurt"]

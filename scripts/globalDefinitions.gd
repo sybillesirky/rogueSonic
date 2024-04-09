@@ -20,5 +20,6 @@ enum specialAction {
 	None,
 	jumpDash,
 	chaosDash,
-	Bounce
+	Bounce,
+	Homing
 }

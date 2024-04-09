@@ -46,6 +46,11 @@ func _changeState(nextState):
 		$hurtTimer.start()
 		$voiceAudioPlayer.playPlayerVoice(1, PlayerInfo.currentCharacter)
 		$specialActions.currentSpecialAction = 0
+	
+	# Cancel the homing attack if we were in it
+	if $specialActions.currentSpecialAction == specialAction.Homing and currentState != state.Fall:
+		$specialActions.currentSpecialAction = specialAction.None
+		get_parent().homingDestination = Vector2(0,0)
 
 
 func _setPlayerState():
