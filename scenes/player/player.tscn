@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://h2ethryphew6"]
+
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_7ji44"]
+[ext_resource type="Script" path="res://scripts/player/playerController.gd" id="2_ep74t"]
+[ext_resource type="Script" path="res://scripts/player/specialActions.gd" id="3_0v31k"]
+[ext_resource type="Script" path="res://scripts/player/charAnimator.gd" id="3_r1pc0"]
+[ext_resource type="SpriteFrames" uid="uid://b63a27u82g3qp" path="res://assets/supersonic/supersonic.tres" id="5_qcmdy"]
+[ext_resource type="AudioStream" uid="uid://ckujip5fy6nav" path="res://assets/sound/jump.wav" id="6_3f66x"]
+[ext_resource type="Script" path="res://scripts/sound/effectAudioPlayer.gd" id="7_gr704"]
+[ext_resource type="Script" path="res://scripts/sound/voiceAudioPlayer.gd" id="8_xlfs4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mi7k6"]
+size = Vector2(16, 32)
+
+[node name="playerSonic" type="Node2D" groups=["Player"]]
+script = ExtResource("1_7ji44")
+
+[node name="char" type="CharacterBody2D" parent="."]
+collision_mask = 3
+floor_max_angle = 1.22173
+script = ExtResource("2_ep74t")
+
+[node name="charCollision" type="CollisionShape2D" parent="char"]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_mi7k6")
+
+[node name="hurtTimer" type="Timer" parent="char"]
+wait_time = 3.0
+one_shot = true
+
+[node name="invulnTimer" type="Timer" parent="char"]
+one_shot = true
+
+[node name="jumpActionTimer" type="Timer" parent="char"]
+wait_time = 0.1
+one_shot = true
+
+[node name="specialActions" type="Node2D" parent="char"]
+script = ExtResource("3_0v31k")
+
+[node name="charAnimator" type="Node2D" parent="char"]
+script = ExtResource("3_r1pc0")
+
+[node name="charSprite" type="AnimatedSprite2D" parent="char/charAnimator"]
+modulate = Color(1, 1, 1, 0.392157)
+texture_filter = 1
+position = Vector2(0, -16)
+sprite_frames = ExtResource("5_qcmdy")
+animation = &"hurt"
+offset = Vector2(0, -5.255)
+
+[node name="effectAudioPlayer" type="AudioStreamPlayer2D" parent="char"]
+stream = ExtResource("6_3f66x")
+script = ExtResource("7_gr704")
+
+[node name="voiceAudioPlayer" type="AudioStreamPlayer2D" parent="char"]
+script = ExtResource("8_xlfs4")
+
+[node name="playerCamera" type="Camera2D" parent="."]
+position = Vector2(0, -16)
+zoom = Vector2(2, 2)
+
+[node name="DEBUG" type="Label" parent="playerCamera"]
+offset_left = -272.0
+offset_top = -144.0
+offset_right = -217.0
+offset_bottom = -121.0
+text = "DEBUG"

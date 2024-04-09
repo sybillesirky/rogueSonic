@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://dfmt74r0ogrs8"]
+
+[ext_resource type="PackedScene" uid="uid://cgeucdgeak803" path="res://scenes/envir/stages/test_stage.tscn" id="1_fr2d1"]
+[ext_resource type="PackedScene" uid="uid://h2ethryphew6" path="res://scenes/player/player.tscn" id="2_4s5as"]
+[ext_resource type="Script" path="res://scripts/testHurtScript.gd" id="3_87o8f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lmqwm"]
+size = Vector2(64, 64)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_38esp"]
+radius = 67.42
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2cr1r"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xt8gi"]
+
+[node name="World" type="Node"]
+
+[node name="testStage" parent="." instance=ExtResource("1_fr2d1")]
+rotation = 3.14159
+
+[node name="playerSonic" parent="." instance=ExtResource("2_4s5as")]
+z_index = 1
+position = Vector2(-88, 176)
+
+[node name="testTrigger" type="Area2D" parent="."]
+position = Vector2(-544, -32)
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("3_87o8f")
+
+[node name="testTriggerShape" type="CollisionShape2D" parent="testTrigger"]
+shape = SubResource("RectangleShape2D_lmqwm")
+debug_color = Color(0.980392, 0, 0, 0.419608)
+
+[node name="testTrigger2" type="Area2D" parent="." groups=["homingAttackTarget"]]
+position = Vector2(-408, -96)
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("3_87o8f")
+
+[node name="testTriggerShape2" type="CollisionShape2D" parent="testTrigger2"]
+shape = SubResource("CircleShape2D_38esp")
+debug_color = Color(0.980392, 0, 0, 0.419608)
+
+[node name="Area2D" type="Area2D" parent="." groups=["homingAttackTarget"]]
+position = Vector2(40, -80)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_2cr1r")
+debug_color = Color(0, 0.65098, 0.141176, 0.419608)
+
+[node name="Area2D2" type="Area2D" parent="." groups=["homingAttackTarget"]]
+position = Vector2(576, -16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+shape = SubResource("CircleShape2D_xt8gi")
+debug_color = Color(0, 0.65098, 0.156863, 0.419608)
+
+[connection signal="body_entered" from="testTrigger" to="playerSonic" method="_getHurt"]
+[connection signal="body_entered" from="testTrigger2" to="playerSonic" method="_getHurt"]

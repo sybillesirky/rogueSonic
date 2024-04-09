@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://c0qu1ve103km3"]
+
+[ext_resource type="Texture2D" uid="uid://b54mltv6hblrq" path="res://assets/effect/sonic/jumpDash/0.png" id="1_11o1p"]
+[ext_resource type="Script" path="res://scripts/effect/jump_dash_particle.gd" id="1_72ock"]
+[ext_resource type="Texture2D" uid="uid://cs8kj8n0qgfse" path="res://assets/effect/sonic/jumpDash/1.png" id="2_kffll"]
+[ext_resource type="Texture2D" uid="uid://ch4l54jsyfgfq" path="res://assets/effect/sonic/jumpDash/2.png" id="3_jphhb"]
+[ext_resource type="Texture2D" uid="uid://dr2r1q4vi0tnh" path="res://assets/effect/sonic/jumpDash/3.png" id="4_rq1xp"]
+[ext_resource type="Texture2D" uid="uid://cf00jf2mjhreb" path="res://assets/effect/sonic/jumpDash/4.png" id="5_x7vns"]
+[ext_resource type="Texture2D" uid="uid://koe5ykgnex5r" path="res://assets/effect/sonic/jumpDash/5.png" id="6_u5jel"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aased"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_11o1p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_kffll")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jphhb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_rq1xp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_x7vns")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_u5jel")
+}],
+"loop": false,
+"name": &"0",
+"speed": 20.0
+}]
+
+[node name="jumpDashParticle" type="Node2D"]
+script = ExtResource("1_72ock")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -5)
+sprite_frames = SubResource("SpriteFrames_aased")
+animation = &"0"
+frame = 5
+frame_progress = 1.0
+
+[connection signal="animation_finished" from="sprite" to="." method="_on_sprite_animation_finished"]
