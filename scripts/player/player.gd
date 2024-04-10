@@ -9,6 +9,7 @@ const state = GlobalDefinitions.state
 const character = GlobalDefinitions.character
 const specialAction = GlobalDefinitions.specialAction
 
+const chaoObject = preload("res://scenes/chao.tscn")
 
 func actionSpring(springVelocity):
 	$char._changeState(state.Jump)
@@ -47,8 +48,9 @@ func _findHomingTarget():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("debug_button"):
-		get_tree().change_scene_to_file("res://scenes/envir/world2.tscn")
-		return
+		var chao = chaoObject.instantiate()
+		get_parent().add_child(chao)
+		chao.ownerPlayer = $char
 	
 	if $char.currentState == state.Jump:
 		_findHomingTarget()

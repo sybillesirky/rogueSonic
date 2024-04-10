@@ -61,5 +61,9 @@ debug_color = Color(0, 0.65098, 0.156863, 0.419608)
 [node name="objectSpring" parent="." instance=ExtResource("5_lkm64")]
 position = Vector2(-992, 208)
 
+[node name="objectSpring2" parent="." instance=ExtResource("5_lkm64")]
+position = Vector2(1344, -16)
+springPower = 800
+
 [connection signal="body_entered" from="testTrigger" to="playerSonic" method="_getHurt"]
 [connection signal="body_entered" from="testTrigger2" to="playerSonic" method="_getHurt"]

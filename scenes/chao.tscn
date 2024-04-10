@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://bnbnm0x6asbva"]
+
+[ext_resource type="Script" path="res://scripts/chao.gd" id="1_q43f5"]
+[ext_resource type="Texture2D" uid="uid://cbgxxitgf8dol" path="res://assets/chao/cheese/0.png" id="2_q5yhd"]
+[ext_resource type="Texture2D" uid="uid://btuv87u7iop6" path="res://assets/chao/cheese/1.png" id="3_1qphv"]
+[ext_resource type="Texture2D" uid="uid://c3bxebdt8j0kh" path="res://assets/chao/cheese/2.png" id="4_gd7jw"]
+[ext_resource type="Texture2D" uid="uid://c6lqahahty6do" path="res://assets/chao/cheese/3.png" id="5_0gf10"]
+[ext_resource type="Texture2D" uid="uid://bhcmrkt436ie8" path="res://assets/chao/cheese/4.png" id="6_406ha"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ei7k1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_q5yhd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1qphv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gd7jw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0gf10")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_406ha")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0gf10")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gd7jw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1qphv")
+}],
+"loop": true,
+"name": &"cheese",
+"speed": 10.0
+}]
+
+[node name="chao" type="Node2D"]
+script = ExtResource("1_q43f5")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_ei7k1")
+animation = &"cheese"
+frame_progress = 0.486727

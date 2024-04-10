@@ -23,3 +23,8 @@ enum specialAction {
 	Bounce,
 	Homing
 }
+
+enum chaoTypes {
+	Cheese,
+	Sonic
+}
