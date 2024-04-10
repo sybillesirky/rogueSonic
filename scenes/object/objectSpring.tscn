@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://dbd7qdnm0gj0k"]
+
+[ext_resource type="Script" path="res://scripts/object/objectSpring.gd" id="1_32wi3"]
+[ext_resource type="Texture2D" uid="uid://dsgqvhd3srfim" path="res://assets/object/spring/1.png" id="1_47ify"]
+[ext_resource type="Texture2D" uid="uid://jcqlxl770lte" path="res://assets/object/spring/2.png" id="2_fj41f"]
+[ext_resource type="Texture2D" uid="uid://7u86vcqls3pt" path="res://assets/object/spring/3.png" id="3_6vbkr"]
+[ext_resource type="Texture2D" uid="uid://boqv8vdrx1um5" path="res://assets/object/spring/0.png" id="4_kepr6"]
+[ext_resource type="AudioStream" uid="uid://dglt033lgr43a" path="res://assets/sound/object/spring.wav" id="6_axkyj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4lyk0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fj41f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6vbkr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_kepr6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_47ify")
+}],
+"loop": false,
+"name": &"activate",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_kepr6")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t4uyv"]
+size = Vector2(16, 24)
+
+[node name="objectSpring" type="Node2D"]
+script = ExtResource("1_32wi3")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -20)
+sprite_frames = SubResource("SpriteFrames_4lyk0")
+animation = &"idle"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["homingAttackTarget"]]
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_t4uyv")
+debug_color = Color(0.776471, 0.309804, 0.788235, 0.419608)
+
+[node name="springSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_axkyj")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

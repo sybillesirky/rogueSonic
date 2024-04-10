@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://h2ethryphew6" path="res://scenes/player/player.tscn" id="1_iwfjl"]
 [ext_resource type="PackedScene" uid="uid://cgeucdgeak803" path="res://scenes/envir/stages/test_stage.tscn" id="2_1rug4"]
 [ext_resource type="Script" path="res://scripts/testHurtScript.gd" id="3_ssire"]
-[ext_resource type="PackedScene" uid="uid://dph5dx6ir126d" path="res://scenes/enemy/enemyAndroid.tscn" id="4_gmyt1"]
+[ext_resource type="PackedScene" uid="uid://dbd7qdnm0gj0k" path="res://scenes/object/objectSpring.tscn" id="5_lkm64"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lmqwm"]
 size = Vector2(64, 64)
@@ -22,7 +22,7 @@ radius = 5.0
 
 [node name="playerSonic" parent="." instance=ExtResource("1_iwfjl")]
 z_index = 1
-position = Vector2(-296, -96)
+position = Vector2(1048, -85)
 
 [node name="testTrigger" type="Area2D" parent="."]
 position = Vector2(-544, -32)
@@ -58,8 +58,8 @@ position = Vector2(576, -16)
 shape = SubResource("CircleShape2D_xt8gi")
 debug_color = Color(0, 0.65098, 0.156863, 0.419608)
 
-[node name="enemyAndroid" parent="." instance=ExtResource("4_gmyt1")]
-position = Vector2(-472, 8)
+[node name="objectSpring" parent="." instance=ExtResource("5_lkm64")]
+position = Vector2(-992, 208)
 
 [connection signal="body_entered" from="testTrigger" to="playerSonic" method="_getHurt"]
 [connection signal="body_entered" from="testTrigger2" to="playerSonic" method="_getHurt"]

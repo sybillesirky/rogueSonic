@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://bdvyk4msatsta"
-path="res://.godot/imported/ring.wav-8f7f24da5ac24a74682eb9b2ced2b89f.sample"
+uid="uid://cgx4mlyw3n0et"
+path="res://.godot/imported/ringBank.wav-6cf6e1860cfdf8ef28973b4af593e980.sample"
 
 [deps]
 
-source_file="res://assets/sound/ring.wav"
-dest_files=["res://.godot/imported/ring.wav-8f7f24da5ac24a74682eb9b2ced2b89f.sample"]
+source_file="res://assets/sound/object/ringBank.wav"
+dest_files=["res://.godot/imported/ringBank.wav-6cf6e1860cfdf8ef28973b4af593e980.sample"]
 
 [params]
 

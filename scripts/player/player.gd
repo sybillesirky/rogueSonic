@@ -7,8 +7,16 @@ var currentHomingTarget = ""
 
 const state = GlobalDefinitions.state
 const character = GlobalDefinitions.character
+const specialAction = GlobalDefinitions.specialAction
 
-func _getHomingTarget():
+
+func actionSpring(springVelocity):
+	$char._changeState(state.Jump)
+	$char/specialActions.currentSpecialAction = specialAction.None
+	$char.velocity.y = -1 * springVelocity
+
+
+func _findHomingTarget():
 	# Two variables to store the best target candidate
 	var nearestHomingDestination = Vector2(0,0)
 	var nearestTargetDistance = 10000
@@ -16,8 +24,8 @@ func _getHomingTarget():
 	
 	# Loop through all candidates and get the one with the shortest legal distance
 	for target in get_tree().get_nodes_in_group("homingAttackTarget"):
-		var targetPosition = target.position - self.position
-		var targetDistance = abs(targetPosition.x - $char.position.x)
+		var targetPosition = target.global_position - self.position
+		var targetDistance = abs(targetPosition - $char.position).length()
 		var playerFacingTarget = ($char.position.x - targetPosition.x) * $char.horizontalDirection < 0
 		var targetBelowPlayer = $char.position.y - targetPosition.y < 0
 		if targetDistance < nearestTargetDistance and targetBelowPlayer and playerFacingTarget and targetDistance < 200:
@@ -43,7 +51,7 @@ func _process(delta):
 		return
 	
 	if $char.currentState == state.Jump:
-		_getHomingTarget()
+		_findHomingTarget()
 		
 	# Follow the character
 	$playerCamera.position = $char.position
