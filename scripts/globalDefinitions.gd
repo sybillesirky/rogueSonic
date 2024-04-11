@@ -25,6 +25,9 @@ enum specialAction {
 }
 
 enum chaoTypes {
+	None,
 	Cheese,
-	Sonic
+	Sonic,
+	Shadow,
+	Ifrit
 }

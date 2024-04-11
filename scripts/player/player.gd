@@ -1,15 +1,58 @@
 extends Node2D
 
-var testDamage = false
-
-var homingDestination = Vector2(0,0)
-var currentHomingTarget = ""
-
+# Define enums for easier writing
 const state = GlobalDefinitions.state
 const character = GlobalDefinitions.character
 const specialAction = GlobalDefinitions.specialAction
 
+var playerStruct = PlayerInfo.player1
+var currentCharacter = playerStruct.currentCharacter
+
+# Special Actions
+var availableActionForward = specialAction.None
+var availableActionUpward = specialAction.None
+var availableActionDownward = specialAction.None
+
+# Stats
+var attackStrength = 1
+
+# Homing Attack
+var homingDestination = Vector2(0,0)
+var currentHomingTarget = ""
+
 const chaoObject = preload("res://scenes/chao.tscn")
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	# Determine the special actions available.
+	if playerStruct.chaoSlotForward == GlobalDefinitions.chaoTypes.None:
+		match currentCharacter:
+			character.Sonic:
+				availableActionForward = specialAction.jumpDash
+			character.Shadow:
+				availableActionForward = specialAction.chaosDash
+			character.SuperSonic:
+				availableActionForward = specialAction.chaosDash
+	
+	if Input.is_action_just_pressed("debug_button"):
+		var chao = chaoObject.instantiate()
+		get_parent().add_child(chao)
+		chao.ownerPlayer = $char
+	
+	if Input.is_action_just_pressed("debug_button_2"):
+		currentCharacter += 1
+		if currentCharacter == len(character):
+			currentCharacter = 0
+	
+	if $char.currentState == state.Jump:
+		_findHomingTarget()
+		
+	# Follow the character
+	$playerCamera.position = $char.position
+	
+	$playerCamera/DEBUG.text = str($char.state.keys()[$char.currentState]) + "\n" + str($char.global_position)
+
 
 func actionSpring(springVelocity):
 	$char._changeState(state.Jump)
@@ -43,24 +86,10 @@ func _findHomingTarget():
 		$homingReticle.visible = true
 		$homingReticle.position = nearestHomingDestination
 	homingDestination = nearestHomingDestination
-	
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if Input.is_action_just_pressed("debug_button"):
-		var chao = chaoObject.instantiate()
-		get_parent().add_child(chao)
-		chao.ownerPlayer = $char
-	
-	if $char.currentState == state.Jump:
-		_findHomingTarget()
-		
-	# Follow the character
-	$playerCamera.position = $char.position
-	
-	$playerCamera/DEBUG.text = str($char.state.keys()[$char.currentState]) + "\n" + str($char.global_position)
+
 
 func _getHurt(body):
 	if body == $char and $char.currentState != GlobalDefinitions.state.Hurt and $char/invulnTimer.is_stopped():
 		$char._changeState(5)
 		$homingReticle.visible = false
+		homingDestination = Vector2(0,0)

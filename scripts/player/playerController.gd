@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@onready var playerObject = get_parent()
+
 const character = GlobalDefinitions.character
 const state = GlobalDefinitions.state
 const specialAction = GlobalDefinitions.specialAction
@@ -7,12 +9,20 @@ const specialAction = GlobalDefinitions.specialAction
 var currentState = state.Idle
 var previousState = state.Idle
 
-@export var speedCap = 1000
-@export var jumpVelocity = 700
-@export var gravity = 30
-@export var friction = 5
-@export var acceleration = 5
-@export var deceleration = 20
+var baseSpeedCap = 1000
+var baseJumpVelocity = 700
+var baseFriction = 5
+var baseAcceleration = 5
+var baseDeceleration = 20
+
+var gravity = 30
+
+var speedCap = baseSpeedCap
+var jumpVelocity = baseJumpVelocity
+var friction = baseFriction
+var acceleration = baseAcceleration
+var deceleration = baseDeceleration
+
 var horizontalDirection = 1
 var inputDirection = 0
 var forwardAngle = Vector2(1,0)
@@ -36,7 +46,7 @@ func _changeState(nextState):
 	
 	# Play the roll sound if we enter Roll state
 	if nextState == state.Roll:
-		$effectAudioPlayer.playPlayerSFX(3, PlayerInfo.currentCharacter)
+		$effectAudioPlayer.playPlayerSFX(3, playerObject.currentCharacter)
 	
 	# Play the hurt SFX if we enter that state
 	if nextState == state.Hurt:
@@ -44,7 +54,7 @@ func _changeState(nextState):
 		velocity.y *= -up_direction.y
 		allowInput = false
 		$hurtTimer.start()
-		$voiceAudioPlayer.playPlayerVoice(1, PlayerInfo.currentCharacter)
+		$voiceAudioPlayer.playPlayerVoice(1, playerObject.currentCharacter)
 		$specialActions.currentSpecialAction = 0
 	
 	# Cancel the homing attack if we were in it
@@ -88,27 +98,6 @@ func _setPlayerState():
 
 
 func _physics_process(delta):
-	# Debug switch character
-	if Input.is_action_just_pressed("debug_button_2"):
-		print("test")
-		print(PlayerInfo.currentCharacter)
-		PlayerInfo.currentCharacter += 1
-		if PlayerInfo.currentCharacter == len(character):
-			PlayerInfo.currentCharacter = 0
-	
-		match PlayerInfo.currentCharacter:
-			character.Sonic:
-				PlayerInfo.availableActionForward = specialAction.jumpDash
-				PlayerInfo.availableActionDownward = specialAction.Bounce
-			
-			character.Shadow:
-				PlayerInfo.availableActionForward = specialAction.chaosDash
-				PlayerInfo.availableActionDownward = specialAction.Bounce
-			
-			character.SuperSonic:
-				PlayerInfo.availableActionForward = specialAction.jumpDash
-				PlayerInfo.availableActionDownward = specialAction.Bounce
-	
 	# Set some constants
 	floor_stop_on_slope = false
 	floor_snap_length = 40
@@ -201,7 +190,7 @@ func _physics_process(delta):
 		velocity += get_floor_normal() * jumpVelocity
 		_changeState(state.Jump)
 		$jumpActionTimer.start()
-		$effectAudioPlayer.playPlayerSFX(0, PlayerInfo.currentCharacter)
+		$effectAudioPlayer.playPlayerSFX(0, playerObject.currentCharacter)
 	
 	# Floor glue, this keeps the character on the wall/ceiling when running on it
 	if is_on_floor() and up_direction != Vector2(0,-1) and currentState == state.Run:
@@ -226,7 +215,7 @@ func _physics_process(delta):
 	velocity += speed * forwardAngle
 	
 	# Call the special actions which can override/modify default physics
-	velocity = $specialActions._specialActionsHandler(PlayerInfo.currentCharacter, currentState, velocity, delta)
+	velocity = $specialActions._specialActionsHandler(playerObject.currentCharacter, currentState, velocity, delta)
 	
 	# Prevent micovalues again
 	if abs(velocity.y) < 0.0001:
@@ -237,4 +226,4 @@ func _physics_process(delta):
 	
 	# Manage the player state and animations
 	_setPlayerState()
-	$charAnimator._animatePlayer(PlayerInfo.currentCharacter, currentState, $specialActions.currentSpecialAction)
+	$charAnimator._animatePlayer(playerObject.currentCharacter, currentState, $specialActions.currentSpecialAction)

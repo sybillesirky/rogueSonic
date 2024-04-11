@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bw08d330u4t33"]
+[gd_scene load_steps=10 format=3 uid="uid://bw08d330u4t33"]
 
 [ext_resource type="PackedScene" uid="uid://h2ethryphew6" path="res://scenes/player/player.tscn" id="1_iwfjl"]
 [ext_resource type="PackedScene" uid="uid://cgeucdgeak803" path="res://scenes/envir/stages/test_stage.tscn" id="2_1rug4"]
 [ext_resource type="Script" path="res://scripts/testHurtScript.gd" id="3_ssire"]
+[ext_resource type="PackedScene" uid="uid://cbvie61xsgf5h" path="res://scenes/object/chaoBox.tscn" id="5_56kj7"]
 [ext_resource type="PackedScene" uid="uid://dbd7qdnm0gj0k" path="res://scenes/object/objectSpring.tscn" id="5_lkm64"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lmqwm"]
@@ -64,6 +65,11 @@ position = Vector2(-992, 208)
 [node name="objectSpring2" parent="." instance=ExtResource("5_lkm64")]
 position = Vector2(1344, -16)
 springPower = 800
+
+[node name="chaoBox" parent="." instance=ExtResource("5_56kj7")]
+position = Vector2(1216, -16)
+boxContents = 2
+isRandom = false
 
 [connection signal="body_entered" from="testTrigger" to="playerSonic" method="_getHurt"]
 [connection signal="body_entered" from="testTrigger2" to="playerSonic" method="_getHurt"]

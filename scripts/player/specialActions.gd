@@ -4,6 +4,8 @@ const character = GlobalDefinitions.character
 const state = GlobalDefinitions.state
 const specialAction = GlobalDefinitions.specialAction
 
+@onready var playerObject = get_parent().get_parent()
+
 var currentSpecialAction = specialAction.None
 
 var bounceIncrease = 0
@@ -18,10 +20,12 @@ func _specialActionHomingAttack(velocity):
 		get_parent()._changeState(state.Fall)
 		get_parent().position = get_parent().position.move_toward(homingDestination, 17)
 		returnVelocity = Vector2(0,0)
+		get_parent().get_node("hitbox").monitorable = true
 	else:
 		get_parent()._changeState(state.Jump)
 		currentSpecialAction = specialAction.None
 		returnVelocity = Vector2(0,-400)
+		get_parent().get_node("hitbox").monitorable = false
 	
 	return returnVelocity
 
@@ -165,14 +169,14 @@ func _specialActionsHandler(inputCharacter, currentState, velocity, delta):
 	
 	# Global upward jump actions have the highest priority
 	if Input.is_action_just_pressed("jump") and Input.is_action_pressed("up"):
-		returnVelocity = _doSpecialAction(currentState, velocity, inputCharacter, PlayerInfo.availableActionUpward)
+		returnVelocity = _doSpecialAction(currentState, velocity, inputCharacter, playerObject.availableActionUpward)
 	
 	# Downward global actions have middle priority
 	elif Input.is_action_just_pressed("jump") and Input.is_action_pressed("down"):
-		returnVelocity = _doSpecialAction(currentState, velocity, inputCharacter, PlayerInfo.availableActionDownward)
+		returnVelocity = _doSpecialAction(currentState, velocity, inputCharacter, playerObject.availableActionDownward)
 	
 	# Forward jump actions have the lowest priority
 	elif Input.is_action_just_pressed("jump"):
-		returnVelocity = _doSpecialAction(currentState, velocity, inputCharacter, PlayerInfo.availableActionForward)
+		returnVelocity = _doSpecialAction(currentState, velocity, inputCharacter, playerObject.availableActionForward)
 	
 	return returnVelocity

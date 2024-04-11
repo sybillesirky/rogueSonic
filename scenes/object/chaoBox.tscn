@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=3 uid="uid://cbvie61xsgf5h"]
+
+[ext_resource type="Script" path="res://scripts/object/chaoBox.gd" id="1_23ecj"]
+[ext_resource type="SpriteFrames" uid="uid://cjd1ermqd4icg" path="res://assets/chao/chao.tres" id="1_qk3ne"]
+[ext_resource type="Texture2D" uid="uid://2nw1wvb7d3vq" path="res://assets/object/chaoBox/0.png" id="2_t6msh"]
+[ext_resource type="Texture2D" uid="uid://btod1nprut87g" path="res://assets/object/chaoBox/1.png" id="3_ywuev"]
+[ext_resource type="PackedScene" uid="uid://db14ebp0q1ab0" path="res://scenes/components/health_component.tscn" id="4_ulpre"]
+[ext_resource type="PackedScene" uid="uid://n64bwcepuhtd" path="res://scenes/components/hitbox_component.tscn" id="5_fsfok"]
+[ext_resource type="AudioStream" uid="uid://1jloeijh2tn3" path="res://assets/sound/object/destroyBox.wav" id="7_puvf1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_12h80"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_t6msh")
+}],
+"loop": true,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ywuev")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6iukp"]
+size = Vector2(18, 29)
+
+[node name="chaoBox" type="Node2D"]
+script = ExtResource("1_23ecj")
+
+[node name="chao" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-1, -18)
+sprite_frames = ExtResource("1_qk3ne")
+animation = &"sonic"
+flip_h = true
+
+[node name="box" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -15)
+sprite_frames = SubResource("SpriteFrames_12h80")
+animation = &"closed"
+
+[node name="healthComponent" parent="." instance=ExtResource("4_ulpre")]
+
+[node name="hitboxComponent" parent="." node_paths=PackedStringArray("health") instance=ExtResource("5_fsfok")]
+collision_layer = 3
+collision_mask = 3
+health = NodePath("../healthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitboxComponent" groups=["homingAttackTarget"]]
+position = Vector2(0, -14.5)
+shape = SubResource("RectangleShape2D_6iukp")
+debug_color = Color(0.705882, 0.74902, 0.113725, 0.419608)
+
+[node name="breakAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_puvf1")
+
+[connection signal="area_entered" from="hitboxComponent" to="hitboxComponent" method="_on_area_entered"]

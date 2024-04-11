@@ -1,20 +1,24 @@
-[gd_scene load_steps=12 format=3 uid="uid://h2ethryphew6"]
+[gd_scene load_steps=14 format=3 uid="uid://h2ethryphew6"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_7ji44"]
 [ext_resource type="Script" path="res://scripts/player/playerController.gd" id="2_ep74t"]
 [ext_resource type="Script" path="res://scripts/player/specialActions.gd" id="3_0v31k"]
 [ext_resource type="Script" path="res://scripts/player/charAnimator.gd" id="3_r1pc0"]
-[ext_resource type="SpriteFrames" uid="uid://b63a27u82g3qp" path="res://assets/supersonic/supersonic.tres" id="5_qcmdy"]
+[ext_resource type="SpriteFrames" uid="uid://bvqrwe7vykmot" path="res://assets/sonic/sonic.tres" id="5_nsp8w"]
 [ext_resource type="AudioStream" uid="uid://ckujip5fy6nav" path="res://assets/sound/jump.wav" id="6_3f66x"]
 [ext_resource type="Script" path="res://scripts/sound/effectAudioPlayer.gd" id="7_gr704"]
 [ext_resource type="Script" path="res://scripts/sound/voiceAudioPlayer.gd" id="8_xlfs4"]
 [ext_resource type="Script" path="res://scripts/sound/UIAudioPlayer.gd" id="9_py5g8"]
 [ext_resource type="Texture2D" uid="uid://dgwjfjs0bugsy" path="res://assets/effect/lockOn.png" id="10_hor7r"]
+[ext_resource type="PackedScene" uid="uid://n64bwcepuhtd" path="res://scenes/components/hitbox_component.tscn" id="11_0l72m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mi7k6"]
 size = Vector2(16, 32)
 
-[node name="playerSonic" type="Node2D" groups=["Player"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kb5hw"]
+size = Vector2(24, 24)
+
+[node name="playerObject" type="Node2D" groups=["Player"]]
 script = ExtResource("1_7ji44")
 
 [node name="char" type="CharacterBody2D" parent="."]
@@ -47,9 +51,10 @@ script = ExtResource("3_r1pc0")
 modulate = Color(1, 1, 1, 0.392157)
 texture_filter = 1
 position = Vector2(0, -16)
-sprite_frames = ExtResource("5_qcmdy")
-animation = &"hurt"
-offset = Vector2(0, -5.255)
+sprite_frames = ExtResource("5_nsp8w")
+animation = &"roll"
+frame_progress = 0.806644
+offset = Vector2(0, 7)
 
 [node name="effectAudioPlayer" type="AudioStreamPlayer2D" parent="char"]
 stream = ExtResource("6_3f66x")
@@ -57,6 +62,15 @@ script = ExtResource("7_gr704")
 
 [node name="voiceAudioPlayer" type="AudioStreamPlayer2D" parent="char"]
 script = ExtResource("8_xlfs4")
+
+[node name="hitbox" parent="char" instance=ExtResource("11_0l72m")]
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="char/hitbox"]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_kb5hw")
+debug_color = Color(0.94902, 0, 0.568627, 0.419608)
 
 [node name="playerCamera" type="Camera2D" parent="."]
 position = Vector2(0, -16)

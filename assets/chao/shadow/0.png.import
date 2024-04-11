@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4q78dq4t7xvr"
-path="res://.godot/imported/0.png-ff460ca03a0cfa8b94147bd1c78054ae.ctex"
+uid="uid://tk1g0sd0yabb"
+path="res://.godot/imported/0.png-b76f6cb927d2375ae3ca7dd2a42bccb2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/chao/cheese/0.png"
-dest_files=["res://.godot/imported/0.png-ff460ca03a0cfa8b94147bd1c78054ae.ctex"]
+source_file="res://assets/chao/shadow/0.png"
+dest_files=["res://.godot/imported/0.png-b76f6cb927d2375ae3ca7dd2a42bccb2.ctex"]
 
 [params]
 

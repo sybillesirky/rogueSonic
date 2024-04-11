@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4q78dq4t7xvr"
-path="res://.godot/imported/0.png-ff460ca03a0cfa8b94147bd1c78054ae.ctex"
+uid="uid://bbh7n252gauub"
+path="res://.godot/imported/broken.png-9cc56abd4babe0d31eaf45af61b1ea05.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/chao/cheese/0.png"
-dest_files=["res://.godot/imported/0.png-ff460ca03a0cfa8b94147bd1c78054ae.ctex"]
+source_file="res://assets/object/itemBox/broken.png"
+dest_files=["res://.godot/imported/broken.png-9cc56abd4babe0d31eaf45af61b1ea05.ctex"]
 
 [params]
 
