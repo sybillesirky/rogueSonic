@@ -264,7 +264,7 @@ script = ExtResource("1_xgteo")
 position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_qy40x")
 
-[node name="hitBox" type="Area2D" parent="char"]
+[node name="hitBox" type="Area2D" parent="char" groups=["homingAttackTarget"]]
 
 [node name="hitBoxShape" type="CollisionShape2D" parent="char/hitBox"]
 position = Vector2(0, -16.5)

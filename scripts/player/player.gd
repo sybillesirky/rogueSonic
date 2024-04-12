@@ -4,6 +4,7 @@ extends Node2D
 const state = GlobalDefinitions.state
 const character = GlobalDefinitions.character
 const specialAction = GlobalDefinitions.specialAction
+const chaoTypes = GlobalDefinitions.chaoTypes
 
 var playerStruct = PlayerInfo.player1
 var currentCharacter = playerStruct.currentCharacter
@@ -23,9 +24,22 @@ var currentHomingTarget = ""
 const chaoObject = preload("res://scenes/chao.tscn")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	# Determine the special actions available.
+func matchChaoToAction(direction, chao):
+	if chao == 0: return direction
+	
+	match chao:
+		chaoTypes.Sonic:
+			return specialAction.jumpDash
+		chaoTypes.Shadow:
+			return specialAction.chaosDash
+		chaoTypes.Bounce:
+			return specialAction.Bounce
+	
+	return direction
+
+
+func determineSpecialActions():
+	# Determine default special actions if nothing in that slot
 	if playerStruct.chaoSlotForward == GlobalDefinitions.chaoTypes.None:
 		match currentCharacter:
 			character.Sonic:
@@ -35,10 +49,14 @@ func _process(delta):
 			character.SuperSonic:
 				availableActionForward = specialAction.chaosDash
 	
-	if Input.is_action_just_pressed("debug_button"):
-		var chao = chaoObject.instantiate()
-		get_parent().add_child(chao)
-		chao.ownerPlayer = $char
+	availableActionForward = matchChaoToAction(availableActionForward, PlayerInfo.player1.chaoSlotForward)
+	availableActionDownward = matchChaoToAction(availableActionDownward, PlayerInfo.player1.chaoSlotDownward)
+	availableActionUpward = matchChaoToAction(availableActionUpward, PlayerInfo.player1.chaoSlotUpward)
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	# Determine the special actions available.
+	determineSpecialActions()
 	
 	if Input.is_action_just_pressed("debug_button_2"):
 		currentCharacter += 1

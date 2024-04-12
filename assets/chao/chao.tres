@@ -1,7 +1,10 @@
-[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://cjd1ermqd4icg"]
+[gd_resource type="SpriteFrames" load_steps=12 format=3 uid="uid://cjd1ermqd4icg"]
 
+[ext_resource type="Texture2D" uid="uid://s3fqem4f67vb" path="res://assets/chao/bounce/0.png" id="1_h22og"]
 [ext_resource type="Texture2D" uid="uid://4q78dq4t7xvr" path="res://assets/chao/cheese/0.png" id="1_vmfu6"]
 [ext_resource type="Texture2D" uid="uid://btr2kd8j1q1ac" path="res://assets/chao/cheese/1.png" id="2_8o32q"]
+[ext_resource type="Texture2D" uid="uid://blm0inbekmq1g" path="res://assets/chao/bounce/1.png" id="2_rcfsl"]
+[ext_resource type="Texture2D" uid="uid://chdjqi7wcops4" path="res://assets/chao/bounce/2.png" id="3_djsh6"]
 [ext_resource type="Texture2D" uid="uid://b1ke6j7la12wh" path="res://assets/chao/cheese/2.png" id="3_g3rsc"]
 [ext_resource type="Texture2D" uid="uid://btalivur8peol" path="res://assets/chao/ifrit/0.png" id="4_0qic1"]
 [ext_resource type="Texture2D" uid="uid://crpbdjiirtd0p" path="res://assets/chao/ifrit/1.png" id="5_63nuj"]
@@ -11,6 +14,23 @@
 
 [resource]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_h22og")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_rcfsl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_djsh6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_rcfsl")
+}],
+"loop": true,
+"name": &"bounce",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_vmfu6")

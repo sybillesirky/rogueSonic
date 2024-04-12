@@ -29,5 +29,21 @@ enum chaoTypes {
 	Cheese,
 	Sonic,
 	Shadow,
-	Ifrit
+	Ifrit,
+	Bounce
 }
+
+# Chao default slots so they know where to go.
+# Passive Chao are those that aren't in these categories.
+const chaoDefaultForward = [
+	chaoTypes.Sonic,
+	chaoTypes.Shadow
+]
+
+const chaoDefaultDownward = [
+	chaoTypes.Bounce
+]
+
+const chaoDefaultUpward = [
+	chaoTypes.Cheese
+]

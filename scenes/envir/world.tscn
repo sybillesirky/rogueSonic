@@ -68,6 +68,16 @@ springPower = 800
 
 [node name="chaoBox" parent="." instance=ExtResource("5_56kj7")]
 position = Vector2(1216, -16)
+boxContents = 5
+isRandom = false
+
+[node name="chaoBox2" parent="." instance=ExtResource("5_56kj7")]
+position = Vector2(1152, -16)
+boxContents = 3
+isRandom = false
+
+[node name="chaoBox3" parent="." instance=ExtResource("5_56kj7")]
+position = Vector2(1088, -16)
 boxContents = 2
 isRandom = false
 

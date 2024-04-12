@@ -10,7 +10,14 @@ const chaoObject = preload("res://scenes/chao.tscn")
 
 func onKill():
 	# Add ability
-	PlayerInfo.player1.chaoSlotForward = boxContents
+	if boxContents in GlobalDefinitions.chaoDefaultForward:
+		PlayerInfo.player1.chaoSlotForward = boxContents
+	elif boxContents in GlobalDefinitions.chaoDefaultDownward:
+		PlayerInfo.player1.chaoSlotDownward = boxContents
+	elif boxContents in GlobalDefinitions.chaoDefaultForward:
+		PlayerInfo.player1.chaoSlotUpward = boxContents
+	else:
+		PlayerInfo.player1.chaoSlotPassive = boxContents
 	
 	# Open box
 	$box.animation = "open"
