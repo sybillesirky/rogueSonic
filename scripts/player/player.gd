@@ -8,6 +8,7 @@ const chaoTypes = GlobalDefinitions.chaoTypes
 
 var playerStruct = PlayerInfo.player1
 var currentCharacter = playerStruct.currentCharacter
+var rings = 0
 
 # Special Actions
 var availableActionForward = specialAction.None
@@ -65,7 +66,7 @@ func _process(delta):
 	# Follow the character
 	$playerCamera.position = $char.position
 	
-	$playerCamera/DEBUG.text = str(PlayerInfo.player1.inventory) + "\n" + str(PlayerInfo.player1.currentCharacter)
+	$playerCamera/DEBUG.text = str(PlayerInfo.player1.inventory) + "\n" + str(rings)
 
 
 func actionSpring(springVelocity):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cbrpwgh87bgb4"]
+[gd_scene load_steps=10 format=3 uid="uid://cbrpwgh87bgb4"]
 
 [ext_resource type="Script" path="res://scripts/object/itemBox.gd" id="1_c51us"]
 [ext_resource type="SpriteFrames" uid="uid://b5sbvqjmcytg2" path="res://assets/object/itemBox/itemBox.tres" id="1_oy0yg"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://scripts/healthComponent.gd" id="4_xt7de"]
 [ext_resource type="Script" path="res://scripts/hitboxComponent.gd" id="5_kjfsj"]
 [ext_resource type="AudioStream" uid="uid://1jloeijh2tn3" path="res://assets/sound/object/destroyBox.wav" id="6_8fu26"]
+[ext_resource type="FontFile" uid="uid://d03q50l3ehvhi" path="res://assets/fonts/m3x6.ttf" id="7_la3ul"]
+[ext_resource type="Texture2D" uid="uid://ckxh8f30ahl2j" path="res://assets/object/ring/0.png" id="8_8ly7d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6mlp8"]
 size = Vector2(26, 22)
@@ -39,5 +41,23 @@ debug_color = Color(0.568627, 0.552941, 0.219608, 0.419608)
 
 [node name="breakAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_8fu26")
+
+[node name="costLabel" type="Label" parent="."]
+texture_filter = 1
+offset_left = -20.0
+offset_top = -58.0
+offset_right = 20.0
+offset_bottom = -35.0
+theme_override_fonts/font = ExtResource("7_la3ul")
+theme_override_font_sizes/font_size = 23
+text = "1000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ringSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -35)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_8ly7d")
 
 [connection signal="area_entered" from="HitboxComponent" to="HitboxComponent" method="_on_area_entered"]

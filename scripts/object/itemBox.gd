@@ -5,7 +5,7 @@ const rareItems = GlobalDefinitions.rareItems
 const uncommonItems = GlobalDefinitions.uncommonItems
 const commonItems = GlobalDefinitions.commonItems
 @export var boxContents = GlobalDefinitions.items.speedCapUp
-@export var ringCost = 30
+@export var baseRingCost = 10
 @export var isRandom = true
 
 func onKill():
@@ -15,6 +15,8 @@ func onKill():
 	$contentSprite.queue_free()
 	$HealthComponent.queue_free()
 	$HitboxComponent.queue_free()
+	$costLabel.queue_free()
+	$ringSprite.queue_free()
 	
 	# Add item to inventory
 	for item in PlayerInfo.player1.inventory:
@@ -35,13 +37,19 @@ func _ready():
 		else:
 			boxContents = commonItems[randi_range(0,len(commonItems)-1)]
 	
+	var ringCost = baseRingCost
+	
 	if boxContents in GlobalDefinitions.uncommonItems:
 		$boxSprite.animation = "uncommon"
+		ringCost += baseRingCost / 2
 	elif boxContents in GlobalDefinitions.rareItems:
 		$boxSprite.animation = "rare"
+		ringCost += baseRingCost
 	else:
 		$boxSprite.animation = "common"
 	$boxSprite.play()
+	
+	$costLabel.text = str(ringCost)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
