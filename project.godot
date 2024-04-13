@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="rogueSonic"
-run/main_scene="res://scenes/envir/world.tscn"
+run/main_scene="res://scenes/menu/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GlobalDefinitions="*res://scripts/globalDefinitions.gd"
 PlayerInfo="*res://scripts/playerInfo.gd"
+FadeTransition="*res://scenes/menu/fade_transition.tscn"
 
 [input]
 

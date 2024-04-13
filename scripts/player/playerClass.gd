@@ -1,6 +1,6 @@
 class_name PlayerStruct
 
-var currentCharacter = GlobalDefinitions.character.SuperSonic
+var currentCharacter = GlobalDefinitions.character.Sonic
 var bankRings = 0
 
 var chaoSlotForward = GlobalDefinitions.chaoTypes.None

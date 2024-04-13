@@ -33,6 +33,13 @@ enum chaoTypes {
 	Bounce
 }
 
+enum items {
+	speedCapUp,
+	jumpHeightUp,
+	accelerationUp,
+	brakePowerUp
+}
+
 # Chao default slots so they know where to go.
 # Passive Chao are those that aren't in these categories.
 const chaoDefaultForward = [
@@ -46,4 +53,18 @@ const chaoDefaultDownward = [
 
 const chaoDefaultUpward = [
 	chaoTypes.Cheese
+]
+
+# Item rarities
+const commonItems = [
+	items.jumpHeightUp,
+	items.accelerationUp
+]
+
+const uncommonItems = [
+	items.speedCapUp
+]
+
+const rareItems = [
+	items.brakePowerUp
 ]

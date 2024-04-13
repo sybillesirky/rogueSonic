@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://cbrpwgh87bgb4"]
+
+[ext_resource type="Script" path="res://scripts/object/itemBox.gd" id="1_c51us"]
+[ext_resource type="SpriteFrames" uid="uid://b5sbvqjmcytg2" path="res://assets/object/itemBox/itemBox.tres" id="1_oy0yg"]
+[ext_resource type="SpriteFrames" uid="uid://c80kquarpxmxt" path="res://assets/object/itemBox/itemBoxContent.tres" id="2_pyqp6"]
+[ext_resource type="Script" path="res://scripts/healthComponent.gd" id="4_xt7de"]
+[ext_resource type="Script" path="res://scripts/hitboxComponent.gd" id="5_kjfsj"]
+[ext_resource type="AudioStream" uid="uid://1jloeijh2tn3" path="res://assets/sound/object/destroyBox.wav" id="6_8fu26"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6mlp8"]
+size = Vector2(26, 22)
+
+[node name="itemBox" type="Node2D"]
+script = ExtResource("1_c51us")
+
+[node name="boxSprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -15)
+sprite_frames = ExtResource("1_oy0yg")
+animation = &"common"
+
+[node name="contentSprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-2, -19)
+sprite_frames = ExtResource("2_pyqp6")
+animation = &"unknown"
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("4_xt7de")
+
+[node name="HitboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("5_kjfsj")
+health = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" groups=["homingAttackTarget"]]
+position = Vector2(0, -19)
+shape = SubResource("RectangleShape2D_6mlp8")
+debug_color = Color(0.568627, 0.552941, 0.219608, 0.419608)
+
+[node name="breakAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_8fu26")
+
+[connection signal="area_entered" from="HitboxComponent" to="HitboxComponent" method="_on_area_entered"]

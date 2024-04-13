@@ -53,15 +53,11 @@ func determineSpecialActions():
 	availableActionDownward = matchChaoToAction(availableActionDownward, PlayerInfo.player1.chaoSlotDownward)
 	availableActionUpward = matchChaoToAction(availableActionUpward, PlayerInfo.player1.chaoSlotUpward)
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# Determine the special actions available.
 	determineSpecialActions()
-	
-	if Input.is_action_just_pressed("debug_button_2"):
-		currentCharacter += 1
-		if currentCharacter == len(character):
-			currentCharacter = 0
 	
 	if $char.currentState == state.Jump:
 		_findHomingTarget()
@@ -69,7 +65,7 @@ func _process(delta):
 	# Follow the character
 	$playerCamera.position = $char.position
 	
-	$playerCamera/DEBUG.text = str($char.state.keys()[$char.currentState]) + "\n" + str($char.global_position)
+	$playerCamera/DEBUG.text = str(PlayerInfo.player1.inventory) + "\n" + str(PlayerInfo.player1.currentCharacter)
 
 
 func actionSpring(springVelocity):
