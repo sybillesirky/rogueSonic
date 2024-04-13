@@ -101,7 +101,6 @@ func _physics_process(delta):
 	# Set some constants
 	floor_stop_on_slope = false
 	floor_snap_length = 40
-	Engine.max_fps = 60
 	max_slides = 1000
 	
 	# If we're going fast while on the ground, the floor determines up direction
@@ -133,6 +132,12 @@ func _physics_process(delta):
 	if !allowInput:
 		inputDirection = 0
 	
+	# Normalise direction
+	if inputDirection < 0:
+		inputDirection = -1
+	elif inputDirection > 0:
+		inputDirection = 1
+	
 	# Determine horizontal direction
 	if velocity.x == 0 and inputDirection != 0:
 		horizontalDirection = inputDirection
@@ -147,7 +152,7 @@ func _physics_process(delta):
 	forwardAngle = abs(forwardAngle)
 	if get_floor_normal() != Vector2(0,0):
 		forwardAngle = get_floor_normal().rotated(0.5 * PI)
-	if horizontalDirection == -1:
+	if horizontalDirection < 0:
 		forwardAngle = forwardAngle.rotated(PI)
 	
 	# Horizontal direction is fixed while in the air

@@ -17,7 +17,7 @@ func _specialActionTails(currentState, velocity, currentCharacter):
 	var returnVelocity = velocity
 	
 	# Hover jump
-	returnVelocity.y = -500
+	returnVelocity.y = -400
 	currentSpecialAction = specialAction.HoverJump
 	
 	# Change the state and play sound effects
@@ -178,6 +178,7 @@ func _specialActionsHandler(inputCharacter, currentState, velocity, delta):
 	elif get_parent().is_on_floor():
 		currentSpecialAction = specialAction.None
 		get_parent().get_parent().homingDestination = Vector2(0,0)
+		get_parent().get_node("hitbox").monitorable = false
 		bounceIncrease = 0
 	
 	# Homing Attack

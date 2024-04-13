@@ -72,6 +72,8 @@ func _process(delta):
 	
 	if $char.currentState == state.Jump:
 		_findHomingTarget()
+	else:
+		$homingReticle.visible = false
 		
 	# Follow the character
 	$playerCamera.position = $char.position

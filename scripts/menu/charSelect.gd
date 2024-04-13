@@ -26,6 +26,13 @@ func getDefaultAbilityString(charID):
 
 func startGame():
 	playSFX(soundSelect)
+	
+	# Reset the players stats
+	PlayerInfo.player1.inventory = []
+	PlayerInfo.player1.chaoSlotForward = GlobalDefinitions.chaoTypes.None
+	PlayerInfo.player1.chaoSlotDownward = GlobalDefinitions.chaoTypes.None
+	PlayerInfo.player1.chaoSlotUpward = GlobalDefinitions.chaoTypes.None
+	
 	FadeTransition.fadeTransition("res://scenes/envir/world.tscn")
 
 
