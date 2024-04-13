@@ -35,6 +35,8 @@ func matchChaoToAction(direction, chao):
 			return specialAction.chaosDash
 		chaoTypes.Bounce:
 			return specialAction.Bounce
+		chaoTypes.Tails:
+			return specialAction.HoverJump
 	
 	return direction
 
@@ -50,6 +52,11 @@ func determineSpecialActions():
 			character.SuperSonic:
 				availableActionForward = specialAction.chaosDash
 	
+	if playerStruct.chaoSlotUpward == GlobalDefinitions.chaoTypes.None:
+		match currentCharacter:
+			character.Tails:
+				availableActionUpward = specialAction.HoverJump
+	
 	availableActionForward = matchChaoToAction(availableActionForward, PlayerInfo.player1.chaoSlotForward)
 	availableActionDownward = matchChaoToAction(availableActionDownward, PlayerInfo.player1.chaoSlotDownward)
 	availableActionUpward = matchChaoToAction(availableActionUpward, PlayerInfo.player1.chaoSlotUpward)
@@ -57,6 +64,9 @@ func determineSpecialActions():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if Input.is_action_just_pressed("debug_button"):
+		FadeTransition.fadeTransition("res://scenes/menu/char_select.tscn")
+	
 	# Determine the special actions available.
 	determineSpecialActions()
 	

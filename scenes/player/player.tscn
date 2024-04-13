@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/player/playerController.gd" id="2_ep74t"]
 [ext_resource type="Script" path="res://scripts/player/specialActions.gd" id="3_0v31k"]
 [ext_resource type="Script" path="res://scripts/player/charAnimator.gd" id="3_r1pc0"]
-[ext_resource type="SpriteFrames" uid="uid://bvqrwe7vykmot" path="res://assets/sonic/sonic.tres" id="5_nsp8w"]
+[ext_resource type="SpriteFrames" uid="uid://cfpe34fdt87x0" path="res://assets/tails/tails.tres" id="5_ext88"]
 [ext_resource type="AudioStream" uid="uid://ckujip5fy6nav" path="res://assets/sound/jump.wav" id="6_3f66x"]
 [ext_resource type="Script" path="res://scripts/sound/effectAudioPlayer.gd" id="7_gr704"]
 [ext_resource type="Script" path="res://scripts/sound/voiceAudioPlayer.gd" id="8_xlfs4"]
@@ -51,10 +51,11 @@ script = ExtResource("3_r1pc0")
 modulate = Color(1, 1, 1, 0.392157)
 texture_filter = 1
 position = Vector2(0, -16)
-sprite_frames = ExtResource("5_nsp8w")
-animation = &"roll"
-frame_progress = 0.806644
-offset = Vector2(0, 7)
+sprite_frames = ExtResource("5_ext88")
+animation = &"hurt"
+frame = 3
+frame_progress = 1.0
+offset = Vector2(-2, 3)
 
 [node name="effectAudioPlayer" type="AudioStreamPlayer2D" parent="char"]
 stream = ExtResource("6_3f66x")

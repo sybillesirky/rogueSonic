@@ -1,6 +1,65 @@
-[gd_scene load_steps=2 format=3 uid="uid://i32cugr28qk8"]
+[gd_scene load_steps=14 format=3 uid="uid://i32cugr28qk8"]
 
 [ext_resource type="Script" path="res://scripts/menu/charSelect.gd" id="1_5f7y6"]
+[ext_resource type="Texture2D" uid="uid://ber6tmy1ntdcd" path="res://assets/menu/charSelectOrb_blue.png" id="2_2mvlh"]
+[ext_resource type="Texture2D" uid="uid://bp8ut0yxcxdne" path="res://assets/menu/charSelectOrb_pink.png" id="3_ft3il"]
+[ext_resource type="Texture2D" uid="uid://blbik3v6j47c3" path="res://assets/menu/charSelectOrb_cyan.png" id="4_mkhon"]
+[ext_resource type="Texture2D" uid="uid://ckxkl3tgbffog" path="res://assets/menu/charSelect_Shadow.png" id="5_r6lj0"]
+[ext_resource type="Texture2D" uid="uid://b1htg6f5w5p37" path="res://assets/menu/charSelect_Sonic.png" id="6_4u2l7"]
+[ext_resource type="Texture2D" uid="uid://b0mlr811wam4" path="res://assets/menu/charSelect_SuperSonic.png" id="7_l21tk"]
+[ext_resource type="Texture2D" uid="uid://dtueyib6jf45k" path="res://assets/menu/charSelect_Tails.png" id="8_lwqja"]
+[ext_resource type="AudioStream" uid="uid://dekxoy4j6ud8v" path="res://assets/music/charSelect.wav" id="8_vptbf"]
+[ext_resource type="FontFile" uid="uid://fimsfb6bt665" path="res://assets/fonts/vipnagorgialla bd.otf" id="9_ir2ge"]
+[ext_resource type="FontFile" uid="uid://drb8mbd3pivkd" path="res://assets/fonts/NiseSegaSonic.TTF" id="10_eqyxd"]
+
+[sub_resource type="GDScript" id="GDScript_1wpj3"]
+script/source = "extends ParallaxBackground
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	scroll_offset.y -= 40*delta
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_clbo1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_r6lj0")
+}],
+"loop": true,
+"name": &"shadow",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_4u2l7")
+}],
+"loop": true,
+"name": &"sonic",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_l21tk")
+}],
+"loop": true,
+"name": &"supersonic",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_lwqja")
+}],
+"loop": true,
+"name": &"tails",
+"speed": 5.0
+}]
 
 [node name="charSelect" type="Control"]
 layout_mode = 3
@@ -11,29 +70,199 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5f7y6")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0.329412, 1)
+[node name="Black" type="ParallaxBackground" parent="."]
 
-[node name="startButton" type="Button" parent="."]
+[node name="bgBlack" type="ColorRect" parent="Black"]
+offset_right = 1920.0
+offset_bottom = 1088.0
+color = Color(0, 0, 0, 1)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+script = SubResource("GDScript_1wpj3")
+
+[node name="orbsSmallSlow" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(2, 2)
+motion_mirroring = Vector2(0, 1080)
+
+[node name="orbBlue" type="Sprite2D" parent="ParallaxBackground/orbsSmallSlow"]
+modulate = Color(1, 1, 1, 0.501961)
+texture_filter = 2
+position = Vector2(1728, 968)
+texture = ExtResource("2_2mvlh")
+
+[node name="orbCyan" type="Sprite2D" parent="ParallaxBackground/orbsSmallSlow"]
+modulate = Color(1, 1, 1, 0.501961)
+texture_filter = 2
+position = Vector2(1640, 480)
+texture = ExtResource("4_mkhon")
+
+[node name="orbPink2" type="Sprite2D" parent="ParallaxBackground/orbsSmallSlow"]
+modulate = Color(1, 1, 1, 0.501961)
+texture_filter = 2
+position = Vector2(944, 536)
+texture = ExtResource("3_ft3il")
+
+[node name="orbBlue3" type="Sprite2D" parent="ParallaxBackground/orbsSmallSlow"]
+modulate = Color(1, 1, 1, 0.501961)
+texture_filter = 2
+position = Vector2(664, 752)
+texture = ExtResource("2_2mvlh")
+
+[node name="orbCyan3" type="Sprite2D" parent="ParallaxBackground/orbsSmallSlow"]
+modulate = Color(1, 1, 1, 0.501961)
+texture_filter = 2
+position = Vector2(488, 320)
+texture = ExtResource("4_mkhon")
+
+[node name="orbPink4" type="Sprite2D" parent="ParallaxBackground/orbsSmallSlow"]
+modulate = Color(1, 1, 1, 0.501961)
+texture_filter = 2
+position = Vector2(512, 648)
+texture = ExtResource("3_ft3il")
+
+[node name="orbBlue5" type="Sprite2D" parent="ParallaxBackground/orbsSmallSlow"]
+modulate = Color(1, 1, 1, 0.501961)
+texture_filter = 2
+position = Vector2(1720, 336)
+texture = ExtResource("2_2mvlh")
+
+[node name="orbCyan5" type="Sprite2D" parent="ParallaxBackground/orbsSmallSlow"]
+modulate = Color(1, 1, 1, 0.501961)
+texture_filter = 2
+position = Vector2(1392, 432)
+texture = ExtResource("4_mkhon")
+
+[node name="orbsSmallFast" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(4, 4)
+motion_mirroring = Vector2(0, 1080)
+
+[node name="orbPink" type="Sprite2D" parent="ParallaxBackground/orbsSmallFast"]
+modulate = Color(1, 1, 1, 0.501961)
+texture_filter = 2
+position = Vector2(1408, 832)
+texture = ExtResource("3_ft3il")
+
+[node name="orbBlue2" type="Sprite2D" parent="ParallaxBackground/orbsSmallFast"]
+modulate = Color(1, 1, 1, 0.501961)
+texture_filter = 2
+position = Vector2(928, 904)
+texture = ExtResource("2_2mvlh")
+
+[node name="orbCyan2" type="Sprite2D" parent="ParallaxBackground/orbsSmallFast"]
+modulate = Color(1, 1, 1, 0.501961)
+texture_filter = 2
+position = Vector2(1160, 600)
+texture = ExtResource("4_mkhon")
+
+[node name="orbPink3" type="Sprite2D" parent="ParallaxBackground/orbsSmallFast"]
+modulate = Color(1, 1, 1, 0.501961)
+texture_filter = 2
+position = Vector2(128, 144)
+texture = ExtResource("3_ft3il")
+
+[node name="orbBlue4" type="Sprite2D" parent="ParallaxBackground/orbsSmallFast"]
+modulate = Color(1, 1, 1, 0.501961)
+texture_filter = 2
+position = Vector2(192, 936)
+texture = ExtResource("2_2mvlh")
+
+[node name="orbCyan4" type="Sprite2D" parent="ParallaxBackground/orbsSmallFast"]
+modulate = Color(1, 1, 1, 0.501961)
+texture_filter = 2
+position = Vector2(64, 728)
+texture = ExtResource("4_mkhon")
+
+[node name="orbPink5" type="Sprite2D" parent="ParallaxBackground/orbsSmallFast"]
+modulate = Color(1, 1, 1, 0.501961)
+texture_filter = 2
+position = Vector2(1136, 112)
+texture = ExtResource("3_ft3il")
+
+[node name="orbsBigSlow" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(0, 1080)
+
+[node name="orbPink" type="Sprite2D" parent="ParallaxBackground/orbsBigSlow"]
+modulate = Color(1, 1, 1, 0.501961)
+texture_filter = 2
+position = Vector2(1056, 672)
+scale = Vector2(2, 2)
+texture = ExtResource("3_ft3il")
+
+[node name="orbBlue2" type="Sprite2D" parent="ParallaxBackground/orbsBigSlow"]
+modulate = Color(1, 1, 1, 0.501961)
+texture_filter = 2
+position = Vector2(64, 1000)
+scale = Vector2(2, 2)
+texture = ExtResource("2_2mvlh")
+
+[node name="orbCyan2" type="Sprite2D" parent="ParallaxBackground/orbsBigSlow"]
+modulate = Color(1, 1, 1, 0.501961)
+texture_filter = 2
+position = Vector2(296, 632)
+scale = Vector2(2, 2)
+texture = ExtResource("4_mkhon")
+
+[node name="orbsBigFast" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(3, 3)
+motion_mirroring = Vector2(0, 1080)
+
+[node name="orbBlue" type="Sprite2D" parent="ParallaxBackground/orbsBigFast"]
+modulate = Color(1, 1, 1, 0.501961)
+texture_filter = 2
+position = Vector2(1784, 880)
+scale = Vector2(2, 2)
+texture = ExtResource("2_2mvlh")
+
+[node name="orbCyan" type="Sprite2D" parent="ParallaxBackground/orbsBigFast"]
+modulate = Color(1, 1, 1, 0.501961)
+texture_filter = 2
+position = Vector2(1352, 168)
+scale = Vector2(2, 2)
+texture = ExtResource("4_mkhon")
+
+[node name="orbPink2" type="Sprite2D" parent="ParallaxBackground/orbsBigFast"]
+modulate = Color(1, 1, 1, 0.501961)
+texture_filter = 2
+position = Vector2(752, 368)
+scale = Vector2(2, 2)
+texture = ExtResource("3_ft3il")
+
+[node name="orbBlue3" type="Sprite2D" parent="ParallaxBackground/orbsBigFast"]
+modulate = Color(1, 1, 1, 0.501961)
+texture_filter = 2
+position = Vector2(528, 136)
+scale = Vector2(2, 2)
+texture = ExtResource("2_2mvlh")
+
+[node name="charPoster" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.705882)
+position = Vector2(736, 544)
+sprite_frames = SubResource("SpriteFrames_clbo1")
+animation = &"tails"
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_vptbf")
+volume_db = -10.0
+autoplay = true
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+volume_db = -5.0
+
+[node name="HEADER" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -23.0
-offset_top = -15.5
-offset_right = 23.0
-offset_bottom = 15.5
+offset_left = -464.0
+offset_top = 72.0
+offset_right = 464.0
+offset_bottom = 143.0
 grow_horizontal = 2
-grow_vertical = 2
-text = "Start"
+theme_override_fonts/font = ExtResource("9_ir2ge")
+theme_override_font_sizes/font_size = 58
+text = "CHARACTER SELECT"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="charName" type="Label" parent="."]
 layout_mode = 1
@@ -42,14 +271,47 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -48.0
-offset_top = -52.0
-offset_right = 44.0
-offset_bottom = -29.0
+offset_left = 32.0
+offset_top = -236.0
+offset_right = 936.0
+offset_bottom = -177.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "CHARACTER"
-horizontal_alignment = 1
+theme_override_fonts/font = ExtResource("10_eqyxd")
+theme_override_font_sizes/font_size = 48
+text = "< SONIC >"
 vertical_alignment = 1
 
-[connection signal="pressed" from="startButton" to="." method="_on_start_button_pressed"]
+[node name="charTitle" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = -177.0
+offset_right = 568.0
+offset_bottom = -133.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_ir2ge")
+theme_override_font_sizes/font_size = 36
+text = "\"Fastest Thing Alive\""
+
+[node name="charAbility" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = -76.0
+offset_right = 952.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_ir2ge")
+theme_override_font_sizes/font_size = 36
+text = "STARTING ABILITY: JUMP DASH"

@@ -13,6 +13,22 @@ var bounceIncrease = 0
 const jumpDashParticle = preload("res://scenes/effect/sonic/jump_dash_particle.tscn")
 
 
+func _specialActionTails(currentState, velocity, currentCharacter):
+	var returnVelocity = velocity
+	
+	# Hover jump
+	returnVelocity.y = -500
+	currentSpecialAction = specialAction.HoverJump
+	
+	# Change the state and play sound effects
+	get_parent()._changeState(state.Fall)
+	get_parent().get_node("effectAudioPlayer").playPlayerSFX(6, currentCharacter)
+	get_parent().get_node("voiceAudioPlayer").playPlayerVoice(0, currentCharacter)
+	
+	
+	return returnVelocity
+
+
 func _specialActionHomingAttack(velocity):
 	var homingDestination = get_parent().get_parent().homingDestination
 	var returnVelocity = 0
@@ -128,6 +144,9 @@ func _doSpecialAction(currentState, velocity, currentCharacter, inputAction):
 		
 		specialAction.Bounce:
 			returnVelocity = _specialActionBounceBracelet(currentState, velocity)
+		
+		specialAction.HoverJump:
+			returnVelocity = _specialActionTails(currentState, velocity, currentCharacter)
 	
 	return returnVelocity
 
@@ -140,6 +159,10 @@ func _specialActionsHandler(inputCharacter, currentState, velocity, delta):
 		bounceIncrease += 6 * delta
 		if bounceIncrease > 3:
 			bounceIncrease = 3
+	
+	# Hoverjump reduced gravity
+	if currentSpecialAction == specialAction.HoverJump:
+		returnVelocity.y -= 20
 	
 	# Special landing behaviour if bouncing
 	if get_parent().is_on_floor() and currentSpecialAction == specialAction.Bounce:

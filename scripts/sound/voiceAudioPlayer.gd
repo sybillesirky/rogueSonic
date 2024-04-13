@@ -22,6 +22,13 @@ const voiceLinesSuperSonic = [
 	preload("res://assets/voice/supersonic/success.wav")
 ]
 
+const voiceLinesTails = [
+	preload("res://assets/voice/tails/dash.wav"),
+	preload("res://assets/voice/tails/hurt.wav"),
+	preload("res://assets/voice/tails/intro.wav"),
+	preload("res://assets/voice/tails/success.wav")
+]
+
 const character = GlobalDefinitions.character
 
 
@@ -52,5 +59,8 @@ func playPlayerVoice(voiceAction, currentCharacter):
 		
 		character.SuperSonic:
 			stream = voiceLinesSuperSonic[voiceID]
+			
+		character.Tails:
+			stream = voiceLinesTails[voiceID]
 	
 	self.play()

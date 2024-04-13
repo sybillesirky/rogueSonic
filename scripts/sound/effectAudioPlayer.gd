@@ -7,6 +7,7 @@ var jumpShadowSound = preload("res://assets/sound/shadow/jump_shadow.wav")
 var rollSound = preload("res://assets/sound/roll.wav")
 var bounceSound = preload("res://assets/sound/bounceBracelet.wav")
 var homingSound = preload("res://assets/sound/homing.wav")
+var hoverJumpSound = preload("res://assets/sound/tails/hoverJump.wav")
 
 enum character {
 	Sonic,
@@ -21,6 +22,7 @@ enum playerSFX {
 	roll,
 	bounce,
 	homing,
+	hoverJump
 }
 
 func playPlayerSFX(soundEffect, currentCharacter):
@@ -45,5 +47,8 @@ func playPlayerSFX(soundEffect, currentCharacter):
 		
 		playerSFX.homing:
 			stream = homingSound
+			
+		playerSFX.hoverJump:
+			stream = hoverJumpSound
 	
 	self.play()

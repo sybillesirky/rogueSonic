@@ -14,7 +14,7 @@ func onKill():
 		PlayerInfo.player1.chaoSlotForward = boxContents
 	elif boxContents in GlobalDefinitions.chaoDefaultDownward:
 		PlayerInfo.player1.chaoSlotDownward = boxContents
-	elif boxContents in GlobalDefinitions.chaoDefaultForward:
+	elif boxContents in GlobalDefinitions.chaoDefaultUpward:
 		PlayerInfo.player1.chaoSlotUpward = boxContents
 	else:
 		PlayerInfo.player1.chaoSlotPassive = boxContents

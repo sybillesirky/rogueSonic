@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=12 format=3 uid="uid://cjd1ermqd4icg"]
+[gd_resource type="SpriteFrames" load_steps=18 format=3 uid="uid://cjd1ermqd4icg"]
 
 [ext_resource type="Texture2D" uid="uid://s3fqem4f67vb" path="res://assets/chao/bounce/0.png" id="1_h22og"]
 [ext_resource type="Texture2D" uid="uid://4q78dq4t7xvr" path="res://assets/chao/cheese/0.png" id="1_vmfu6"]
@@ -11,6 +11,12 @@
 [ext_resource type="Texture2D" uid="uid://bsctrt21uqn8j" path="res://assets/chao/ifrit/2.png" id="6_2yb1u"]
 [ext_resource type="Texture2D" uid="uid://tk1g0sd0yabb" path="res://assets/chao/shadow/0.png" id="7_ynrey"]
 [ext_resource type="Texture2D" uid="uid://dfgq5pdkqsr5p" path="res://assets/chao/sonic/0.png" id="8_ck7qn"]
+[ext_resource type="Texture2D" uid="uid://dybmel1pmd4m3" path="res://assets/chao/tails/0.png" id="12_k84vi"]
+[ext_resource type="Texture2D" uid="uid://cwwvvdhaoxkha" path="res://assets/chao/tails/1.png" id="13_0pit5"]
+[ext_resource type="Texture2D" uid="uid://c111wt3kui5jm" path="res://assets/chao/tails/2.png" id="14_irjkv"]
+[ext_resource type="Texture2D" uid="uid://cgeqcm3adllt1" path="res://assets/chao/tails/3.png" id="15_0sw8h"]
+[ext_resource type="Texture2D" uid="uid://c8ngxblrlnej5" path="res://assets/chao/tails/4.png" id="16_s415m"]
+[ext_resource type="Texture2D" uid="uid://djl00cyxqxvte" path="res://assets/chao/tails/5.png" id="17_ivc54"]
 
 [resource]
 animations = [{
@@ -29,7 +35,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"bounce",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -80,4 +86,27 @@ animations = [{
 "loop": true,
 "name": &"sonic",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_k84vi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_0pit5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_irjkv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_0sw8h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_s415m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_ivc54")
+}],
+"loop": true,
+"name": &"tails",
+"speed": 10.0
 }]

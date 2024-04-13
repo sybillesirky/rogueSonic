@@ -3,6 +3,7 @@ extends Node
 enum character {
 	Sonic,
 	Shadow,
+	Tails,
 	SuperSonic
 }
 
@@ -21,7 +22,8 @@ enum specialAction {
 	jumpDash,
 	chaosDash,
 	Bounce,
-	Homing
+	Homing,
+	HoverJump
 }
 
 enum chaoTypes {
@@ -30,7 +32,8 @@ enum chaoTypes {
 	Sonic,
 	Shadow,
 	Ifrit,
-	Bounce
+	Bounce,
+	Tails
 }
 
 enum items {
@@ -52,7 +55,8 @@ const chaoDefaultDownward = [
 ]
 
 const chaoDefaultUpward = [
-	chaoTypes.Cheese
+	chaoTypes.Cheese,
+	chaoTypes.Tails
 ]
 
 # Item rarities

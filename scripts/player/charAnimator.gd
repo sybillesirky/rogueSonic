@@ -4,6 +4,13 @@ const character = GlobalDefinitions.character
 const state = GlobalDefinitions.state
 const specialAction = GlobalDefinitions.specialAction
 
+const charGhostColors = [
+	Color8(0,64,232,200),	# Sonic
+	Color8(255,145,0,200),	# Shadow
+	Color8(248,184,32,200),	# Tails
+	Color8(255,255,0,200)	# Super Sonic
+]
+
 var characterName = str(character.keys()[0])
 
 var ghostEffect = preload("res://scenes/effect/dash_ghost.tscn")
@@ -18,8 +25,82 @@ func _spawnDashGhosts(ghostColor):
 	ghost.texture = currentSprite
 	ghost.flip_h = $charSprite.flip_h
 	ghost.offset.y = $charSprite.offset.y
+	ghost.offset.x = $charSprite.offset.x
 	ghost.rotation = $charSprite.rotation
 	ghost.modulate = ghostColor
+
+
+func _animsTails(currentState, currentSpecialAction):
+	$charSprite.speed_scale = 1
+	
+	if currentSpecialAction != specialAction.None:
+		match currentSpecialAction:
+			specialAction.HoverJump:
+				$charSprite.animation = "fly"
+				$charSprite.offset.y = -3
+				$charSprite.offset.x = -3
+			
+			specialAction.Bounce:
+				$charSprite.animation = "bounce"
+				$charSprite.offset.y = 0
+				$charSprite.offset.x = 0
+			
+			specialAction.Homing:
+				$charSprite.animation = "roll"
+				$charSprite.offset.y = 7
+				$charSprite.offset.x = 0
+			
+			_:
+				$charSprite.animation = "dash"
+				$charSprite.offset.y = -3
+				$charSprite.offset.x = -3
+		return
+	
+	match currentState:
+		state.Idle:
+			$charSprite.animation = "idle"
+			$charSprite.offset.y = -3
+			$charSprite.offset.x = -8
+		
+		state.Roll:
+			$charSprite.rotation = 0
+			$charSprite.animation = "roll"
+			$charSprite.offset.y = 7
+			$charSprite.offset.x = 0
+		
+		state.Jump:
+			$charSprite.animation = "jump"
+			$charSprite.offset.y = 2
+			$charSprite.offset.x = 0
+		
+		state.Fall:
+			$charSprite.animation = "fall"
+			$charSprite.offset.y = -7
+			$charSprite.offset.x = -3
+		
+		state.Crouch:
+			$charSprite.animation = "crouch"
+			$charSprite.offset.y = 5
+			$charSprite.offset.x = -8
+		
+		state.Run:
+			if get_parent().velocity.length() > 750:
+				$charSprite.animation = "run"
+			elif get_parent().velocity.length() > 600:
+				$charSprite.animation = "slowrun"
+			elif get_parent().velocity.length() > 400:
+				$charSprite.animation = "fastwalk"
+			elif get_parent().velocity.length() > 100:
+				$charSprite.animation = "midwalk"
+			else:
+				$charSprite.animation = "walk"
+			$charSprite.offset.y = -15
+			$charSprite.offset.x = -7
+		
+		state.Hurt:
+			$charSprite.animation = "hurt"
+			$charSprite.offset.y = 3
+			$charSprite.offset.x = -2
 
 
 func _animsSuperSonic(currentState, currentSpecialAction):
@@ -28,14 +109,6 @@ func _animsSuperSonic(currentState, currentSpecialAction):
 	
 	if currentSpecialAction != specialAction.None:
 		match currentSpecialAction:
-			specialAction.jumpDash:
-				$charSprite.animation = "dash"
-				$charSprite.offset.y = 0
-			
-			specialAction.chaosDash:
-				$charSprite.animation = "dash"
-				$charSprite.offset.y = 0
-			
 			specialAction.Bounce:
 				$charSprite.animation = "dash"
 				$charSprite.rotation += 0.5 * PI * get_parent().horizontalDirection
@@ -44,6 +117,10 @@ func _animsSuperSonic(currentState, currentSpecialAction):
 			specialAction.Homing:
 				$charSprite.animation = "roll"
 				$charSprite.offset.y = 7
+			
+			_:
+				$charSprite.animation = "dash"
+				$charSprite.offset.y = 0
 		
 		return
 	
@@ -87,14 +164,6 @@ func _animsShadow(currentState, currentSpecialAction):
 	
 	if currentSpecialAction != specialAction.None:
 		match currentSpecialAction:
-			specialAction.chaosDash:
-				$charSprite.animation = "chaos_dash"
-				$charSprite.offset.y = 0
-			
-			specialAction.jumpDash:
-				$charSprite.animation = "chaos_dash"
-				$charSprite.offset.y = 0
-			
 			specialAction.Bounce:
 				$charSprite.animation = "bounce"
 				$charSprite.offset.y = 0
@@ -102,6 +171,10 @@ func _animsShadow(currentState, currentSpecialAction):
 			specialAction.Homing:
 				$charSprite.animation = "roll"
 				$charSprite.offset.y = 7
+			
+			_:
+				$charSprite.animation = "chaos_dash"
+				$charSprite.offset.y = 0
 		
 		return
 	
@@ -142,14 +215,6 @@ func _animsSonic(currentState, currentSpecialAction):
 	
 	if currentSpecialAction != specialAction.None:
 		match currentSpecialAction:
-			specialAction.jumpDash:
-				$charSprite.animation = "jump_dash"
-				$charSprite.offset.y = 0
-			
-			specialAction.chaosDash:
-				$charSprite.animation = "jump_dash"
-				$charSprite.offset.y = 0
-			
 			specialAction.Bounce:
 				$charSprite.animation = "bounce"
 				$charSprite.offset.y = 0
@@ -157,6 +222,10 @@ func _animsSonic(currentState, currentSpecialAction):
 			specialAction.Homing:
 				$charSprite.animation = "roll"
 				$charSprite.offset.y = 7
+			
+			_:
+				$charSprite.animation = "jump_dash"
+				$charSprite.offset.y = 0
 		
 		return
 	
@@ -215,6 +284,8 @@ func _animatePlayer(inputCharacter, currentState, currentSpecialAction):
 			_animsShadow(currentState, currentSpecialAction)
 		character.SuperSonic:
 			_animsSuperSonic(currentState, currentSpecialAction)
+		character.Tails:
+			_animsTails(currentState, currentSpecialAction)
 	
 	# Play the animation if we're on a new one
 	if $charSprite.animation != previousAnimation:
@@ -222,8 +293,12 @@ func _animatePlayer(inputCharacter, currentState, currentSpecialAction):
 	
 	# Flip sprite if necessary
 	$charSprite.flip_h = 0 > get_parent().horizontalDirection
+	if inputCharacter == character.Tails and $charSprite.flip_h:
+		$charSprite.offset.x = -$charSprite.offset.x
 	if currentState == state.Hurt:
 		$charSprite.flip_h = !$charSprite.flip_h
+		if inputCharacter == character.Tails and $charSprite.flip_h:
+			$charSprite.offset.x = -$charSprite.offset.x
 	
 	# Make the player translucent if we're supposed to be invulnerable
 	if !get_parent().get_node("invulnTimer").is_stopped():
@@ -233,15 +308,5 @@ func _animatePlayer(inputCharacter, currentState, currentSpecialAction):
 	
 	# Spawn after-image ghosts when doing some actions
 	if currentSpecialAction != specialAction.None or abs(get_parent().velocity.x) >= 900 or inputCharacter == character.SuperSonic:
-		match inputCharacter:
-			character.Sonic:
-				_spawnDashGhosts(Color8(0,64,232,200))
-			
-			character.Shadow:
-				_spawnDashGhosts(Color8(255,145,0,200))
-			
-			character.SuperSonic:
-				_spawnDashGhosts(Color8(255,255,0,200))
-			
-			_:
-				_spawnDashGhosts(Color8(1,1,1,1))
+		var ghostColor = charGhostColors[inputCharacter]
+		_spawnDashGhosts(ghostColor)

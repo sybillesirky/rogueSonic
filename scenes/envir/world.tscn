@@ -25,7 +25,7 @@ radius = 5.0
 
 [node name="playerSonic" parent="." instance=ExtResource("1_iwfjl")]
 z_index = 1
-position = Vector2(-760, 184)
+position = Vector2(664, -40)
 
 [node name="testTrigger" type="Area2D" parent="."]
 position = Vector2(-544, -32)
@@ -85,6 +85,11 @@ isRandom = false
 [node name="chaoBox3" parent="." instance=ExtResource("5_56kj7")]
 position = Vector2(1088, -16)
 boxContents = 2
+isRandom = false
+
+[node name="chaoBox4" parent="." instance=ExtResource("5_56kj7")]
+position = Vector2(1024, -16)
+boxContents = 6
 isRandom = false
 
 [node name="itemBox" parent="." instance=ExtResource("6_mgvgx")]
