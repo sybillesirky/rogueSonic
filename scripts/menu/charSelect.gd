@@ -33,7 +33,7 @@ func startGame():
 	PlayerInfo.player1.chaoSlotDownward = GlobalDefinitions.chaoTypes.None
 	PlayerInfo.player1.chaoSlotUpward = GlobalDefinitions.chaoTypes.None
 	
-	FadeTransition.fadeTransition("res://scenes/envir/world.tscn")
+	FadeTransition.fadeTransition("res://scenes/stage/sunset_hill.tscn")
 
 
 func playSFX(input):

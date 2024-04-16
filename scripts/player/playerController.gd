@@ -30,6 +30,8 @@ var rollAngle = Vector2(0,0)
 var playerRotation = 0
 var allowInput = true
 
+var floorCheck = false
+
 
 func _changeState(nextState):
 	# Do nothing if the state didn't change
@@ -78,8 +80,14 @@ func _setPlayerState():
 	
 	# If not in jump/fall/roll while in the air, you fall
 	if !is_on_floor() and (currentState == state.Idle or currentState == state.Run):
+		if floorCheck == false:
+			floorCheck = true
+			return
+		print("test")
 		_changeState(state.Fall)
 		return
+	
+	floorCheck = false
 	
 	# Force stay on Roll until we're stationary
 	if velocity != Vector2(0,0) and currentState == state.Roll:
@@ -199,7 +207,7 @@ func _physics_process(delta):
 	
 	# Floor glue, this keeps the character on the wall/ceiling when running on it
 	if is_on_floor() and up_direction != Vector2(0,-1) and currentState == state.Run:
-		velocity += 300 * -get_floor_normal()
+		velocity += 100 * -get_floor_normal()
 	
 	# Roll
 	if Input.is_action_just_pressed("down") and velocity.x != 0 and is_on_floor():
@@ -207,13 +215,13 @@ func _physics_process(delta):
 	
 	# Different collisions in certain circumstances
 	if currentState == state.Roll:
-		$charCollision.shape.size.y = 16
+		$charCollision.shape.height = 16
 		$charCollision.position.y = -8
 	elif currentState == state.Crouch:
-		$charCollision.shape.size.y = 24
+		$charCollision.shape.height = 24
 		$charCollision.position.y = -12
 	else:
-		$charCollision.shape.size.y = 32
+		$charCollision.shape.height = 32
 		$charCollision.position.y = -16
 	
 	# Apply the speed in accordance with the forward angle

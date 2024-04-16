@@ -12,8 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://dgwjfjs0bugsy" path="res://assets/effect/lockOn.png" id="10_hor7r"]
 [ext_resource type="PackedScene" uid="uid://n64bwcepuhtd" path="res://scenes/components/hitbox_component.tscn" id="11_0l72m"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mi7k6"]
-size = Vector2(16, 32)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dp30a"]
+radius = 8.0
+height = 32.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kb5hw"]
 size = Vector2(24, 24)
@@ -28,7 +29,7 @@ script = ExtResource("2_ep74t")
 
 [node name="charCollision" type="CollisionShape2D" parent="char"]
 position = Vector2(0, -16)
-shape = SubResource("RectangleShape2D_mi7k6")
+shape = SubResource("CapsuleShape2D_dp30a")
 
 [node name="hurtTimer" type="Timer" parent="char"]
 wait_time = 3.0
@@ -75,7 +76,7 @@ debug_color = Color(0.94902, 0, 0.568627, 0.419608)
 
 [node name="playerCamera" type="Camera2D" parent="."]
 position = Vector2(0, -16)
-zoom = Vector2(2, 2)
+zoom = Vector2(2.25, 2.25)
 
 [node name="DEBUG" type="Label" parent="playerCamera"]
 offset_left = -272.0
